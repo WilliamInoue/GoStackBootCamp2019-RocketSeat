@@ -21,7 +21,7 @@ class RecipientController {
 
   async showname(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required()
+      name: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -29,7 +29,7 @@ class RecipientController {
     }
 
     const recipient = await Recipient.findOne({
-      where: { name: req.body.name }
+      where: { name: req.body.name },
     });
 
     if (!recipient) {
@@ -52,7 +52,7 @@ class RecipientController {
         .required(),
       zip: Yup.string()
         .length(8)
-        .required()
+        .required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -60,7 +60,7 @@ class RecipientController {
     }
 
     const nameExists = await Recipient.findOne({
-      where: { name: req.body.name }
+      where: { name: req.body.name },
     });
 
     if (nameExists) {
@@ -76,7 +76,7 @@ class RecipientController {
       district,
       city,
       state,
-      zip
+      zip,
     } = await Recipient.create(req.body);
 
     return res.json({
@@ -88,7 +88,7 @@ class RecipientController {
       district,
       city,
       state,
-      zip
+      zip,
     });
   }
 
@@ -100,7 +100,7 @@ class RecipientController {
     }
 
     Recipient.destroy({
-      where: { id: req.params.id }
+      where: { id: req.params.id },
     });
 
     return res.json(`Client record ${recipient.name} deleted`);
@@ -108,7 +108,7 @@ class RecipientController {
 
   async deleteName(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required()
+      name: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -116,7 +116,7 @@ class RecipientController {
     }
 
     const recipient = await Recipient.findOne({
-      where: { name: req.body.name }
+      where: { name: req.body.name },
     });
 
     if (!recipient) {
@@ -124,7 +124,7 @@ class RecipientController {
     }
 
     Recipient.destroy({
-      where: { name: recipient.name }
+      where: { name: recipient.name },
     });
 
     return res.json(`Client record ${recipient.name} deleted`);
@@ -143,7 +143,7 @@ class RecipientController {
         .required(),
       zip: Yup.string()
         .length(8)
-        .required()
+        .required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -151,7 +151,7 @@ class RecipientController {
     }
 
     const recipient = await Recipient.findOne({
-      where: { name: req.body.name }
+      where: { name: req.body.name },
     });
 
     if (!recipient) {
